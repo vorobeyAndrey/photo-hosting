@@ -20,25 +20,30 @@ var Photo = require('../../models/Photo.js');
 
 router.post('/', function(req, res) {
 
-        var form = new multiparty.Form();
-        form.parse(req, function(err, fields, files) {
-            console.log(fields,files);
-            var image = files.image[0];
-            var title = fields.title;
+    var dir = './public/uploads';
+    if (!fs.existsSync(dir)){
+        fs.mkdirSync(dir);
+    }
 
-            fs.readFile(image.path,function(err,data){
-                var uuidImg = uuid.v1()+ path.extname(image.originalFilename);
-                var pathImage = "./public/uploads/"+uuidImg;
-                fs.writeFile(pathImage,data,function(error){
-                    console.log(image);
-                    if(error)console.log(error);
-                    Photo.create({"name":path.parse(image.originalFilename).name,image:uuidImg,note:title,
-                        type:path.extname(image.originalFilename)},function (err,post){
-                        if (err) return next(err);
-                    });
-                })
-            });
-            res.redirect('/');
+    var form = new multiparty.Form();
+    form.parse(req, function(err, fields, files) {
+        console.log(fields,files);
+        var image = files.image[0];
+        var title = fields.title;
+
+        fs.readFile(image.path,function(err,data){
+            var uuidImg = uuid.v1()+ path.extname(image.originalFilename);
+            var pathImage = "./public/uploads/"+uuidImg;
+            fs.writeFile(pathImage,data,function(error){
+                console.log(image);
+                if(error)console.log(error);
+                Photo.create({"name":path.parse(image.originalFilename).name,image:uuidImg,note:title,
+                    type:path.extname(image.originalFilename)},function (err,post){
+                    if (err) return next(err);
+                });
+            })
         });
+        res.redirect('/');
+    });
 });
 module.exports = router;
