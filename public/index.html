@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" data-ng-app="appPhoto">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link href="./vendors/bootstrap/dist/css/bootstrap.min.css"
+          rel="stylesheet" type="text/css" />
+    <script src="./vendors/angular/angular.min.js"></script><!-- load angular -->
+    <script src="./vendors/angular-resource/angular-resource.min.js"></script><!-- load angular -->
+    <script src="./vendors/angular-route/angular-route.min.js"></script><!-- load angular -->
+    <script src="./vendors/angular-file-upload/dist/angular-file-upload.min.js"></script><!-- load angular -->
+    <script src="./javascripts/photohost/app.js"></script>
+    <script src="./javascripts/photohost/router.js"></script>
+    <script src="./javascripts/photohost/service/photoSrv.js"></script>
+    <script src="./javascripts/photohost/controller/PhotoListCtrl.js"></script>
+    <script src="./javascripts/photohost/controller/PhotoUpdateCtrl.js"></script>
+    <script src="./javascripts/photohost/controller/PhotoUploadCtrl.js"></script>
+
+</head>
+<body >
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header"><a href="#/">Photo Hosting</a></h1>
+        </div>
+        <div ng-view></div>
+    </div>
+    <hr>
+    <!-- Footer -->
+    <footer>
+        <div class="row">
+            <div class="col-lg-12">
+                <p>Copyright © Your Website 2015</p>
+            </div>
+        </div>
+    </footer>
+
+</div>
+</body>
+</html>
